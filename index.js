@@ -1,16 +1,18 @@
-function search(nums, target) {
-  let left = 0;
-  let right = nums.length - 1;
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    if (nums[mid] === target) return mid;
-    if (nums[left] <= nums[mid]) {
-      if (nums[left] <= target && target < nums[mid]) right = mid - 1;
-      else left = mid + 1;
-    } else {
-      if (nums[mid] < target && target <= nums[right]) left = mid + 1;
-      else right = mid - 1;
+function detectCycle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      let p1 = head;
+      let p2 = slow;
+      while (p1 !== p2) {
+        p1 = p1.next;
+        p2 = p2.next;
+      }
+      return p1;
     }
   }
-  return -1;
+  return null;
 }
