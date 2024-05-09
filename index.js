@@ -1,18 +1,14 @@
-function detectCycle(head) {
-  let slow = head;
-  let fast = head;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    if (slow === fast) {
-      let p1 = head;
-      let p2 = slow;
-      while (p1 !== p2) {
-        p1 = p1.next;
-        p2 = p2.next;
-      }
-      return p1;
+function subarraySum(nums, k) {
+  const map = new Map();
+  map.set(0, 1);
+  let count = 0;
+  let sum = 0;
+  for (const num of nums) {
+    sum += num;
+    if (map.has(sum - k)) {
+      count += map.get(sum - k);
     }
+    map.set(sum, (map.get(sum) || 0) + 1);
   }
-  return null;
+  return count;
 }
