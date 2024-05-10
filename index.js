@@ -1,14 +1,17 @@
-function subarraySum(nums, k) {
-  const map = new Map();
-  map.set(0, 1);
-  let count = 0;
-  let sum = 0;
-  for (const num of nums) {
-    sum += num;
-    if (map.has(sum - k)) {
-      count += map.get(sum - k);
+function sortColors(nums) {
+  let left = 0;
+  let right = nums.length - 1;
+  let i = 0;
+  while (i <= right) {
+    if (nums[i] === 0) {
+      [nums[i], nums[left]] = [nums[left], nums[i]];
+      left++;
+      i++;
+    } else if (nums[i] === 2) {
+      [nums[i], nums[right]] = [nums[right], nums[i]];
+      right--;
+    } else {
+      i++;
     }
-    map.set(sum, (map.get(sum) || 0) + 1);
   }
-  return count;
 }
