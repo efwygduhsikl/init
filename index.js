@@ -1,6 +1,27 @@
-const gcd = (a, b) => {
-  if (b === 0) {
-    return a;
+function Trie() {
+  this.root = {};
+}
+Trie.prototype.insert = function (word) {
+  let node = this.root;
+  for (const char of word) {
+    if (!node[char]) node[char] = {};
+    node = node[char];
   }
-  return gcd(b, a % b);
+  node.isEnd = true;
+};
+Trie.prototype.search = function (word) {
+  let node = this.root;
+  for (const char of word) {
+    if (!node[char]) return false;
+    node = node[char];
+  }
+  return node.isEnd === true;
+};
+Trie.prototype.startsWith = function (prefix) {
+  let node = this.root;
+  for (const char of prefix) {
+    if (!node[char]) return false;
+    node = node[char];
+  }
+  return true;
 };
