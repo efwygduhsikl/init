@@ -1,27 +1,14 @@
-function Trie() {
-  this.root = {};
-}
-Trie.prototype.insert = function (word) {
-  let node = this.root;
-  for (const char of word) {
-    if (!node[char]) node[char] = {};
-    node = node[char];
+const shellSort = (arr) => {
+  const n = arr.length;
+  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+    for (let i = gap; i < n; i++) {
+      const temp = arr[i];
+      let j;
+      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+        arr[j] = arr[j - gap];
+      }
+      arr[j] = temp;
+    }
   }
-  node.isEnd = true;
-};
-Trie.prototype.search = function (word) {
-  let node = this.root;
-  for (const char of word) {
-    if (!node[char]) return false;
-    node = node[char];
-  }
-  return node.isEnd === true;
-};
-Trie.prototype.startsWith = function (prefix) {
-  let node = this.root;
-  for (const char of prefix) {
-    if (!node[char]) return false;
-    node = node[char];
-  }
-  return true;
+  return arr;
 };
