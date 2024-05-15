@@ -1,14 +1,7 @@
-const shellSort = (arr) => {
-  const n = arr.length;
-  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-    for (let i = gap; i < n; i++) {
-      const temp = arr[i];
-      let j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-        arr[j] = arr[j - gap];
-      }
-      arr[j] = temp;
-    }
-  }
-  return arr;
-};
+function pathSum(root, sum) {
+  if (!root) return false;
+  if (!root.left && !root.right && root.val === sum) return true;
+  return (
+    pathSum(root.left, sum - root.val) || pathSum(root.right, sum - root.val)
+  );
+}
